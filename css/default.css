@@ -1,0 +1,90 @@
+body {
+	background-color:#e9e9e9;
+}
+
+.link_home {
+	font-family: 'Audiowide', cursive;
+	font-size: x-large;
+}
+
+.link_external {
+	height: 45px;
+}
+
+.right > li > a > i {
+	font-size: x-large;
+}
+
+.page {
+	display: none;
+	margin-top: 1.25rem;
+}
+
+.contain-to-grid {
+  width: 100%;
+  background: #503080;
+}
+
+.top-bar {
+  background: #503080;
+}
+
+.top-bar-section li.active:not(.has-form) a:not(.button) {
+  color: #FFFFFF;
+  background: #8060b0;
+}
+
+.top-bar-section li:not(.has-form) a:not(.button):hover {
+  background: #8060b0;
+}
+
+.top-bar-section li:not(.has-form) a:not(.button) {
+  background: #503080;
+}
+
+.top-bar.expanded .title-area {
+  background: #503080;
+}
+
+.top-bar-section > ul > .divider, .top-bar-section > ul > [role="separator"] {
+  border-bottom: none;
+  border-top: none;
+  border-right: solid 1px #ffffff;
+}
+
+.top-bar-section ul li {
+  background: #ffffff;
+}
+
+.panel {
+  background: #503080;
+  color: #FFFFFF;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Audiowide;
+}
+
+.panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6, .panel p, .panel li, .panel dl {
+  color: #ffffff;
+}
+
+button {
+	background-color: #8060b0;
+}
+
+.tab{
+	margin-bottom: 0px;
+}
+
+.tab.active{
+	background-color: #503080;
+}
+
+.section {
+	display: none;
+}
+
+.panel-icon {
+  font-size: xxx-large;
+}
