@@ -1,90 +1,65 @@
+/* 
+  COLORS:
+    Purple      -   #732C7B
+    Dark Gray   -   #333333 
+    Light Gray  -   #cccccc
+*/
+
 body {
-	background-color:#e9e9e9;
+    background-color: #cccccc;
 }
 
-.link_home {
-	font-family: 'Audiowide', cursive;
-	font-size: x-large;
+#page_active {
+    margin-top: 1rem;
 }
 
-.link_external {
-	height: 45px;
+h1, h2, h3, h4, h5 {
+    font-family: 'Oswald', sans-serif;
+    font-style: normal;
 }
 
-.right > li > a > i {
-	font-size: x-large;
+/*  SEARCH PANEL   */
+/*
+.searchpanel input, .searchpanel a.button {
+    margin-bottom: 0px;
 }
 
-.page {
-	display: none;
-	margin-top: 1.25rem;
+.searchpanel h4 {
+    padding-left: 15px;
+    margin: 0px;
 }
 
-.contain-to-grid {
-  width: 100%;
-  background: #503080;
+*/
+
+/*  HOME TABS   */
+
+.home-tabs button {
+    font-family: 'Oswald', sans-serif;
+    font-style: normal;
+    margin-bottom: 0px;   
 }
 
-.top-bar {
-  background: #503080;
+.home-tabs .panel {
+    padding: 0px;
+    padding-top: 10px;
+    margin-bottom: 0px;   
 }
 
-.top-bar-section li.active:not(.has-form) a:not(.button) {
-  color: #FFFFFF;
-  background: #8060b0;
+.home-tabs a.tab.active button {
+    background-color: #700070;
 }
 
-.top-bar-section li:not(.has-form) a:not(.button):hover {
-  background: #8060b0;
+.home-tabs a.tab h4{
+    padding-left: 15px;
+    margin: 0px;
+    opacity: .6;
 }
 
-.top-bar-section li:not(.has-form) a:not(.button) {
-  background: #503080;
+.home-tabs a.tab.active h4 {
+    opacity: 1;
 }
 
-.top-bar.expanded .title-area {
-  background: #503080;
-}
-
-.top-bar-section > ul > .divider, .top-bar-section > ul > [role="separator"] {
-  border-bottom: none;
-  border-top: none;
-  border-right: solid 1px #ffffff;
-}
-
-.top-bar-section ul li {
-  background: #ffffff;
-}
-
-.panel {
-  background: #503080;
-  color: #FFFFFF;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: Audiowide;
-}
-
-.panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6, .panel p, .panel li, .panel dl {
-  color: #ffffff;
-}
-
-button {
-	background-color: #8060b0;
-}
-
-.tab{
-	margin-bottom: 0px;
-}
-
-.tab.active{
-	background-color: #503080;
-}
-
-.section {
-	display: none;
-}
-
-.panel-icon {
-  font-size: xxx-large;
+.content-panel {
+    background-color: #333333;
+    display: none;
 }

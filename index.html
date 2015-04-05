@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NowPlaying</title>
     <link rel="icon" href="img/favicon.png" type="image/png"/>
-    <link href='http://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="img/foundation-icons/foundation-icons.css" />
     <link rel="stylesheet" href="css/default.css" />
@@ -19,7 +19,7 @@
       <nav class="top-bar" data-topbar role="navigation">
         <ul class="title-area">
           <li class="name">
-            <h1><a class="link_start">NowPlaying</a></h1>
+            <h1><a class="link_home"><i class="fi-play"></i> NowPlaying</a></h1>
           </li>
           <li class="toggle-topbar menu-icon"><a><span></span></a></li>
         </ul>
@@ -28,14 +28,14 @@
 
           <!-- Left Nav Section -->
           <ul class="left">
-            <li class="divider"></li>
-            <li id="nav_home">
-              <a class="link_home">Home</i></a>
-            </li>
-            <li class="divider"></li>
           </ul>
           <!-- Right Nav Section -->
           <ul class="right">
+            <li class="divider"></li>
+            <li id="nav_home">
+              <a class="link_login">Login</i></a>
+            </li>
+            <li class="divider"></li>
           </ul>
 
         </section>
@@ -44,168 +44,11 @@
 
     <!-- END NAV BAR -->
 
+    <div id="page_active">
+      <!-- CURRENT PAGE -->
+    </div>
 
     <!-- BEGIN START PAGE -->
-
-    <div class="page" id="page_start">
-      
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="panel">
-            <h2>NowPlaying</h2>
-            <p>We would've called it "Jamgasm" but we'd be in sooooo much trouble.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" data-equalizer>
-        
-        <div class="medium-6 columns">
-          <div class="panel" data-equalizer-watch>
-            <h4>Sign in with Google</h4>
-            <div name="google-sign">
-                <span id="signinButton">
-                  <div id="___signin_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 114px; height: 36px; position: relative; background: transparent;">
-                    <button style="opacity: 0; z-index: 10000; left: 0px; top: 0px; position: absolute; cursor: pointer; outline: 0px; width: 114px; height: 36px;">Sign in with Google</button>
-                    <!--iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 114px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 36px;" tabindex="0" vspace="0" width="100%" id="I0_1425507303517" name="I0_1425507303517" src="https://apis.google.com/_/widget/render/signin?usegapi=1&amp;clientid=794966326118-p7kp9g4h5uclbll3lm8qouk3e7qapf0i.apps.googleusercontent.com&amp;cookiepolicy=single_host_origin&amp;requestvisibleactions=http%3A%2F%2Fschema.org%2FAddAction&amp;scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fplus.profile.emails.read&amp;origin=http%3A%2F%2Fmy-ticket.appspot.com&amp;url=http%3A%2F%2Fmy-ticket.appspot.com%2F&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en_US.NBen0YYgkQM.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Ft%3Dzcms%2Frs%3DAGLTcCP30cazVlxvho8juU2VXVgEy6ckAQ#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh%2Conauth%2Conload&amp;id=I0_1425507303517&amp;parent=http%3A%2F%2Fmy-ticket.appspot.com&amp;pfname=&amp;rpctoken=16275182" data-gapiattached="true" title="Sign in with Google"></iframe-->
-                  </div>
-                </span>
-            </div>
-          </div>
-        </div>
-
-        <div class="medium-6 columns">
-          <div class="panel" data-equalizer-watch>
-            <h4>Don't sign in</h4>
-            <button class="small expand">Just listen</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- END START PAGE -->
-
-
-    <!-- BEGIN HOME PAGE -->
-
-    <div class="page" id="page_home">
-      
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="panel">
-            <h2>Find some music.</h2>
-
-            <div class="row">
-              <div class="small-3 columns">
-                <button class="tiny expand tab tab_popular">Popular</button>
-              </div>
-              <div class="small-3 columns">
-                <button class="tiny expand tab tab_saved">Saved</button>
-              </div>
-              <div class="small-3 columns">
-                <button class="tiny expand tab tab_friends">Friends</button>
-              </div>
-              <div class="small-3 columns">
-                <button class="tiny expand tab tab_settings">Settings</button>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <div class="row" data-equalizer>
-        
-        <div class="small-12 columns section" id="section_popular">
-          <div class="panel" data-equalizer-watch>
-            <h4>Popular</h4>
-
-            <a>
-              <div class="panel">
-                <h5>Sexy Sleep Music</h5>
-                <p>Trace Powers</p>
-              </div>
-            </a>
-            <a>
-              <div class="panel">
-                <h5>Explosive Donkey Rap</h5>
-                <p>Adam Wiggenhauser</p>
-              </div>
-            </a>
-            <a>
-              <div class="panel">
-                <h5>Nasty Grape Smoothie</h5>
-                <p>Ryan Haskell-Glatz</p>
-              </div>
-            </a>
-            <a>
-              <div class="panel">
-                <h5>Christian Alternative</h5>
-                <p>Matthew Broton</p>
-              </div>
-            </a>
-
-          </div>
-        </div>
-        <div class="small-12 columns section" id="section_saved">
-          <div class="panel" data-equalizer-watch>
-            <h4>Saved</h4>
-            <a>
-              <div class="panel">
-                <h5>Sexy Sleep Music</h5>
-                <p>Trace Powers</p>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="small-12 columns section" id="section_friends">
-          <div class="panel" data-equalizer-watch>
-            <h4>Friends</h4>
-            <a>
-              <div class="panel">
-                <h5>Adam Wiggenhauser</h5>
-              </div>
-            </a>
-            <a>
-              <div class="panel">
-                <h5>Matthew Broton</h5>
-              </div>
-            </a>
-            <a>
-              <div class="panel">
-                <h5>Ryan Haskell-Glatz</h5>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="small-12 columns section" id="section_settings">
-          <div class="panel" data-equalizer-watch>
-            <h4>Settings</h4>
-            <button class="large expand" id="btn_delete_face" data-reveal-id="myModal">Delete Face</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- END HOME PAGE -->
-
-    <!-- MODAL -->
-
-    <div id="myModal" class="reveal-modal" data-reveal>
-      <h2>Are you sure you want to delete your face?</h2>
-      <p class="lead">It sounds like a bad idea...</p>
-      <div class="row">
-        <div class="small-6 columns">
-          <button class="tiny expand" id="btn_df_yes">Yes</button>
-        </div>
-        <div class="small-6 columns">
-          <button class="tiny expand" id="btn_df_no">No</button>
-        </div>
-      </div>
-      <a class="close-reveal-modal">&#215;</a>
-    </div>
 
     
     <script src="js/vendor/jquery.js"></script>
