@@ -32,9 +32,16 @@
           <!-- Right Nav Section -->
           <ul class="right">
             <li class="divider"></li>
-            <li id="nav_home">
-              <a class="link_login">Login</a>
+
+            <li id="li_login"><a class="link_login">Login</a></li>
+
+            <li id="li_user" class="has-dropdown">
+              <a>Ryan</a>
+              <ul class="dropdown">
+                <li><a class="link_logout">Logout</a></li>
+              </ul>
             </li>
+
             <li class="divider"></li>
           </ul>
 
@@ -43,12 +50,10 @@
 
       <div id="loginAlertSuccess" data-alert class="alert-box success">
         Login successful!
-        <a href="#" class="close">&times;</a>
       </div>
 
       <div id="logoutAlertSuccess" data-alert class="alert-box">
         Logout successful!
-        <a href="#" class="close">&times;</a>
       </div>
     </div>
 
@@ -62,7 +67,53 @@
 
     <div id="loginModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
       <h2>Hey there!</h2>
-      <button class="expand" id="btn_login">Login</button>
+      <div class="row"  data-equalizer>
+
+        <div class="small-6 columns left-side-swag"  data-equalizer-watch>
+          <h4>Sign Up</h4>
+          <form id="form_createAccount">
+            <div class="row collapse">
+              <div class="small-12 columns">
+                <input id="create_username" type="text" placeholder="Username" />
+              </div>
+              <div class="small-12 columns">
+                <input id="create_pass" type="password" placeholder="Password" />
+              </div>
+              <div class="small-12 columns">
+                <input id="create_passConfirm" type="password" placeholder="Confirm Password" />
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="small-6 columns"  data-equalizer-watch>
+          <h4>Login</h4>
+          <form id="form_login">
+            <div class="row collapse">
+              <div class="small-12 columns">
+                <input id="username" type="text" placeholder="Username" />
+              </div>
+              <div class="small-12 columns">
+                <input id="pass" type="password" placeholder="Password" />
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+      <div class="row"> 
+
+        <div class="small-6 columns left-side-swag">
+          <button class="small expand" id="btn_login">Create</button>
+        </div>
+
+        <div class="small-6 columns">
+          <button class="small expand" id="btn_login">Login</button>
+        </div>
+
+      </div>
+
       <a class="close-reveal-modal" aria-label="Close">&#215;</a>
     </div>
 

@@ -18,21 +18,20 @@ h1, h2, h3, h4, h5 {
     font-style: normal;
 }
 
-/*  search-column   */
-/*
-.search-column input, .search-column a.button {
-    margin-bottom: 0px;
-}
-
-.search-column h4 {
-    padding-left: 15px;
-    margin: 0px;
-}
-*/
 .alert-box {
     display: none;
     top:0px;
     margin: 0px;
+}
+
+#li_user {
+    display: none;
+}
+
+.left-side-swag {
+    border-right: 1px;
+    border-right-style: solid;
+    border-right-color: #cccccc;
 }
 
 /*  HOME TABS   */

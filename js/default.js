@@ -7,6 +7,7 @@ function onReady()
     loggedIn = false;
     loadPage("home");
     $('.link_login').click(promptLogin);
+    $('.link_logout').click(promptLogout);
     $('#btn_login').click(login);
     $('#btn_logout').click(logout);
 }
@@ -37,7 +38,8 @@ function loadPageHelper(htmlFile, func, pageName)
 function homeReady()
 {
     $('.home-tabs a.tab').click(tabClicked);
-    $('.search-column').keyup(searchBarClicked);
+    $('.search-column').keyup(doSearch);
+    $('.search-column').click(expandSearchbar);
     $('#tab_popular').click();
 }
 
@@ -101,29 +103,47 @@ function promptLogout()
 
 function login()
 {
+    //  Close modal
     $('#loginModal').foundation('reveal', 'close');
+    
+    //  Login
     loggedIn = true;
-    $('.link_login').text("Maria");
-    $('.link_login').unbind( "click" );
-    $('.link_login').click(promptLogout);
-    $('#loginAlertSuccess').slideDown();
-    $('#loginAlertSuccess .close').click(closeLoginAlert);
+
+    //  Show username in top right
+    $('#li_user > a').text(getUsername());
+
+    //  Show logout button
+    $('#li_login').toggle();
+    $('#li_user').toggle();
+
+    //  Display alert and set up alert close event
+    $('#loginAlertSuccess').slideDown().delay(1000).slideUp();
+}
+
+function getUsername()
+{
+    return "Maria";
 }
 
 function logout()
 {
+    //  Close modal
     $('#logoutModal').foundation('reveal', 'close');
+    
+    //  Logout
     loggedIn = false;
-    $('.link_login').text("Login");
-    $('.link_login').unbind( "click" );
-    $('.link_login').click(promptLogin);
-    $('#logoutAlertSuccess').slideDown();
-    $('#logoutAlertSuccess .close').click(closeLoginAlert);
+
+    //  Hide logout button
+    $('#li_login').toggle();
+    $('#li_user').toggle();
+
+    //  Display alert and set up alert close timer.
+    $('#logoutAlertSuccess').slideDown().delay(1000).slideUp();
 }
 
-function closeLoginAlert()
+function closeAlert()
 {
-    $('#loginAlertSuccess').slideUp();
+    $('#alert-box').slideUp();
 }
 
 function switchToTab(tab)
@@ -176,7 +196,12 @@ function getPlaylists(src)
     });
 }
 
-function searchBarClicked()
+function doSearch()
+{
+    $('#tab_search').click();
+}
+
+function expandSearchbar()
 {
     if(!$(this).hasClass('medium-9'))
     {
@@ -195,8 +220,6 @@ function searchBarClicked()
             $('.search-column').toggleClass('medium-9');
         }
     }
-
-    $('#tab_search').click();
 }
 
 function addPanel(title, username, lastPanel)
