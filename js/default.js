@@ -8,6 +8,7 @@ function onReady()
     loadPage("home");
     $('.link_login').click(promptLogin);
     $('#btn_login').click(login);
+    $('#btn_logout').click(logout);
 }
 
 function loadPage(pageName)
@@ -93,12 +94,31 @@ function promptLogin()
     $('#loginModal').foundation('reveal','open');
 }
 
+function promptLogout()
+{
+    $('#logoutModal').foundation('reveal','open');
+}
+
 function login()
 {
     $('#loginModal').foundation('reveal', 'close');
     loggedIn = true;
+    $('.link_login').text("Maria");
+    $('.link_login').unbind( "click" );
+    $('.link_login').click(promptLogout);
     $('#loginAlertSuccess').slideDown();
     $('#loginAlertSuccess .close').click(closeLoginAlert);
+}
+
+function logout()
+{
+    $('#logoutModal').foundation('reveal', 'close');
+    loggedIn = false;
+    $('.link_login').text("Login");
+    $('.link_login').unbind( "click" );
+    $('.link_login').click(promptLogin);
+    $('#logoutAlertSuccess').slideDown();
+    $('#logoutAlertSuccess .close').click(closeLoginAlert);
 }
 
 function closeLoginAlert()

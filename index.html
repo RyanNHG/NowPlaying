@@ -40,14 +40,21 @@
 
         </section>
       </nav>
+
+      <div id="loginAlertSuccess" data-alert class="alert-box success">
+        Login successful!
+        <a href="#" class="close">&times;</a>
+      </div>
+
+      <div id="logoutAlertSuccess" data-alert class="alert-box">
+        Logout successful!
+        <a href="#" class="close">&times;</a>
+      </div>
     </div>
 
     <!-- END NAV BAR -->
 
-    <div id="loginAlertSuccess" data-alert class="alert-box success">
-      Login successful!
-      <a href="#" class="close">&times;</a>
-    </div>
+
 
     <div id="page_active">
       <!-- CURRENT PAGE -->
@@ -56,6 +63,12 @@
     <div id="loginModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
       <h2>Hey there!</h2>
       <button class="expand" id="btn_login">Login</button>
+      <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    </div>
+
+    <div id="logoutModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+      <h2>Do you want to logout?</h2>
+      <button class="expand alert" id="btn_logout">Logout</button>
       <a class="close-reveal-modal" aria-label="Close">&#215;</a>
     </div>
 
