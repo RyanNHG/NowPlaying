@@ -33,7 +33,7 @@
           <ul class="right">
             <li class="divider"></li>
             <li id="nav_home">
-              <a class="link_login">Login</i></a>
+              <a class="link_login">Login</a>
             </li>
             <li class="divider"></li>
           </ul>
@@ -44,11 +44,21 @@
 
     <!-- END NAV BAR -->
 
+    <div id="loginAlertSuccess" data-alert class="alert-box success">
+      Login successful!
+      <a href="#" class="close">&times;</a>
+    </div>
+
     <div id="page_active">
       <!-- CURRENT PAGE -->
     </div>
 
-    <!-- BEGIN START PAGE -->
+    <div id="loginModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+      <h2>Hey there!</h2>
+      <button class="expand" id="btn_login">Login</button>
+      <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    </div>
+
 
     
     <script src="js/vendor/jquery.js"></script>

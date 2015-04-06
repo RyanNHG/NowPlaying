@@ -18,18 +18,22 @@ h1, h2, h3, h4, h5 {
     font-style: normal;
 }
 
-/*  SEARCH PANEL   */
+/*  search-column   */
 /*
-.searchpanel input, .searchpanel a.button {
+.search-column input, .search-column a.button {
     margin-bottom: 0px;
 }
 
-.searchpanel h4 {
+.search-column h4 {
     padding-left: 15px;
     margin: 0px;
 }
-
 */
+#loginAlertSuccess {
+    display: none;
+    top:0px;
+    margin: 0px;
+}
 
 /*  HOME TABS   */
 
