@@ -1,0 +1,254 @@
+<div class="row">
+
+  <!-- LEFT SIDE -->
+  <div class="medium-8 columns">
+    
+    <div class="row" id="row_current">
+
+      <div class="small-12 columns">
+
+        <div class="panel">
+          <div class="row">
+
+            <div class="small-3 columns">
+              <h5 id="current_title">Song Title</h5>
+              <p id="current_artist">Artist</p>
+            </div>
+            <div class="small-6 columns">
+              <!-- DATA SLIDER -->
+              <div class="progress">
+                <span class="meter" style="width: 10%;"></span>
+              </div>
+
+            </div>
+            <div class="small-3 columns" id="div_controls">
+              <div class="row collapse">
+                <div class="small-4 columns">
+                  <a class="button tiny expand"  id="btn_prev">
+                    <i class="fi-previous"></i>
+                  </a>
+                </div>
+                <div class="small-4 columns">
+                  <a class="button tiny expand" id="btn_play">
+                    <i class="fi-play"></i>
+                  </a>
+                </div>
+                <div class="small-4 columns">
+                  <a class="button tiny expand"  id="tbe_next">
+                    <i class="fi-next"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="row" id="row_playlist">
+
+      <div class="small-12 columns">
+        <h4>The Playlist</h4>
+      </div>
+
+      <div class="small-12 columns">
+
+        <div class="panel" id="dark_panel">
+        
+          <div class="row collapse" id="row_songs">
+
+            <div class="small-12 columns">
+              <div class="panel song_panel active">
+                <div class="row">
+                  <div class="small-11 columns">
+                    <h5 class="playlist">Song Title</h5>
+                    <p class="artist">Artist</p>
+                  </div>
+                  <div class="small-1 columns div_remove">
+                    <div class="row collapse">
+                      <div class="small-12 columns">
+                        <a>
+                          <i class="fi-x"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="small-12 columns">
+              <div class="panel song_panel">
+                <div class="row">
+                  <div class="small-11 columns">
+                    <h5 class="playlist">Song Title</h5>
+                    <p class="artist">Artist</p>
+                  </div>
+                  <div class="small-1 columns div_remove">
+                    <div class="row collapse">
+                      <div class="small-12 columns">
+                        <a>
+                          <i class="fi-x"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="small-12 columns">
+              <div class="panel song_panel">
+                <div class="row">
+                  <div class="small-11 columns">
+                    <h5 class="playlist">Song Title</h5>
+                    <p class="artist">Artist</p>
+                  </div>
+                  <div class="small-1 columns div_remove">
+                    <div class="row collapse">
+                      <div class="small-12 columns">
+                        <a><i class="fi-x"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+        <div class="panel" id="add_panel">
+          <div class="row collapse">
+            
+            <div class="small-10 columns">
+              <input type="text" class="expand" placeholder="Add a song or album to the playlist..." id="field_addSong"></input>
+            </div>
+
+            <div class="small-2 columns">
+              <button class="expand postfix" id="btn_addSong">
+                <i class="fi-plus"></i>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="medium-4 columns">
+
+    <div class="row" id="row_info">
+
+      <div class="small-12 columns">
+
+
+        <!-- HEADER -->
+        <a>
+          <div class="panel">
+            <div class="row">
+
+              <div class="small-9 columns">
+                <h3 id="current_playlist">Playlist Name</h3>
+                <p id="current_author">Author</p>
+              </div>
+              <div class="small-3 columns" id="div_save">
+                <div class="row collapse">
+                  <div class="small-12 columns">
+                    <button class="tiny expand" id = "btn_save">
+                      <i class="fi-star"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </a>
+
+        <!-- PUBLIC VIEW -->
+        <div class="row" id="row_publicInfo">
+
+          <div class="small-12 columns">
+
+          </div>
+        </div>
+
+        <!-- MOD VIEW -->
+        <div class="row" id="row_modInfo">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="row_chat">
+
+      <div class="small-10 columns">
+        <h4>Chat</h4>
+      </div>
+      <div class="small-2 columns">
+        <a id="btn_toggleChat">
+          <i class="fi-arrow-down"></i>
+        </a>
+      </div>
+
+      <div class="small-12 columns">
+        <div class="panel" id="panel_chat">
+
+          <div class="message">
+            <h6><strong>Maria: </strong></h6>
+            <p>Hola senor, como estas?</p>
+            <hr>
+          </div>
+          <div class="message">
+            <h6><strong>Maria: </strong></h6>
+            <p>Hola senor, como estas?</p>
+            <hr>
+          </div>
+          <div class="message">
+            <h6><strong>Maria: </strong></h6>
+            <p>Hola senor, como estas?</p>
+            <hr>
+          </div>
+          <div class="message">
+            <h6><strong>Maria: </strong></h6>
+            <p>Hola senor, como estas?</p>
+            <hr>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="small-12 columns">
+        <div class="panel" id="panel_send">
+          <div class="row collapse">
+            
+            <div class="small-10 columns">
+              <input type="text" class="tiny expand" placeholder="Send a message..." id="field_message"></input>
+            </div>
+
+            <div class="small-2 columns">
+              <button class="expand postfix" id="btn_message">
+                <i class="fi-comment"></i>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    
+  </div>
+
+
+
+</div>

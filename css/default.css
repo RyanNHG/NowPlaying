@@ -13,7 +13,7 @@ body {
     margin-top: 1rem;
 }
 
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, h6 {
     font-family: 'Oswald', sans-serif;
     font-style: normal;
 }
@@ -48,21 +48,113 @@ h1, h2, h3, h4, h5 {
     margin-bottom: 0px;   
 }
 
-.home-tabs a.tab.active button {
+.home-tabs a.active button {
     background-color: #700070;
 }
 
-.home-tabs a.tab h4{
+.home-tabs a h4{
     padding-left: 15px;
     margin: 0px;
     opacity: .6;
 }
 
-.home-tabs a.tab.active h4 {
+.home-tabs a.active h4 {
     opacity: 1;
 }
 
 .content-panel {
     background-color: #333333;
     display: none;
+}
+
+
+/* PLAY PAGE CSS */
+
+#current_artist, #current_author, .artist {
+    margin : 0px;
+}
+
+#div_controls > .row > .columns > a, 
+#div_save > .row > .columns > button,
+.div_remove > .row > .columns > a
+{
+    font-size: x-large;
+    margin:0px;
+}
+
+#row_info .panel {
+    padding-bottom: .75rem;
+}
+
+#dark_panel {
+    background-color: #333333;
+    padding: 0px;
+    padding-top:10px;
+}
+
+.song_panel {
+    margin-bottom: 10px;
+}
+
+.song_panel a {
+    color: gray;
+}
+
+.song_panel.active{
+    background-color:#999999;
+}
+
+.song_panel.active h5,
+.song_panel.active p,
+.song_panel.active a{
+    color:#ffffff;
+}
+
+#btn_toggleChat i {
+    font-size: x-large;
+    color:gray;
+}
+
+#field_addSong, #btn_addSong {
+    margin: 0px;
+}
+
+.progress {
+    margin-top: 15px;
+    border-color: #aaaaaa;
+}
+
+.progress .meter {
+    background:#700070;
+}
+
+#panel_chat, #dark_panel {
+    height: 40vh;
+    margin:0px;
+}
+
+.message h6{
+    color:#008CBA;
+}
+
+.message hr{
+    margin:0px;
+}
+
+.message p{
+    margin:0px;
+    font-size:small;
+}
+
+#panel_send {
+    margin: 0px;
+}
+
+#field_message, #btn_message {
+    margin: 0px;
+}
+
+#row_songs {
+    height:100%;
+    overflow-y:auto;
 }

@@ -1,69 +1,78 @@
 <div class="row">
   
-  <div class="medium-6 columns search-column">
+  <div class="medium-6 columns search-column" id="div_create">
     <h4>Create a Playlist</h4>
-    <!--div class="panel"-->
       <div class="row collapse">
+
         <div class="small-10 columns">
-          <input id="create_query" type="text" placeholder="Enter songs, artists, and albums..." />
+          <input id="create_query" type="search" placeholder="Enter songs, artists, and albums..." />
         </div>
+
         <div class="small-2 columns">
           <a class="button small postfix"><i class="fi-plus"></i></a>
         </div>
+
       </div>
-    <!--/div-->
   </div>
 
-  <div class="medium-6 columns search-column">
+  <div class="medium-6 columns search-column" id="div_find">
     <h4>Find a Playlist</h4>
-    <!--div class="panel"-->
       <div class="row collapse">
+
         <div class="small-10 columns">
-          <input id="find_query" type="text" placeholder="Enter playlist titles and username..." />
+          <input id="find_query" type="search" placeholder="Enter playlist titles and username..." />
         </div>
+
         <div class="small-2 columns">
           <a class="button small postfix"><i class="fi-magnifying-glass"></i></a>
         </div>
+
       </div>
-    <!--/div-->
   </div>
 
   <div class="small-12 columns">
 
     <!--TABS-->
     <div class="row collapse home-tabs">
+
       <div class="small-3 columns">
-        <div class="panel">
-          <a class="tab" id="tab_popular">
-            <h4>Popular</h4>
-            <button class="tiny expand"></button>
-          </a>
-        </div>
+        <a id="tab_popular">
+          <div class="panel">
+            <div class="tab">
+              <h4>Popular</h4>
+              <button class="tiny expand"></button>
+            </div>
+          </div>
+        </a>
       </div>
+
       <div class="small-3 columns">
-        <div class="panel">
-          <a class="tab" id="tab_saved">
+        <a id="tab_saved">
+          <div class="panel">
             <h4>Saved</h4>
             <button class="tiny expand"></button>
-          </a>
-        </div>
+          </div>
+        </a>
       </div>
+
       <div class="small-3 columns">
-        <div class="panel">
-          <a class="tab" id="tab_friends">
+        <a id="tab_friends">
+          <div class="panel">
             <h4>Friends</h4>
             <button class="tiny expand"></button>
-          </a>
-        </div>
+          </div>
+        </a>
       </div>
+
       <div class="small-3 columns">
-        <div class="panel">
-          <a class="tab" id="tab_search">
+        <a id="tab_search">
+          <div class="panel">
             <h4>Search</h4>
             <button class="tiny expand"></button>
-          </a>
-        </div>
+          </div>
+        </a>
       </div>
+
     </div>
 
     <!-- CONTENT PANEL -->

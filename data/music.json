@@ -1,0 +1,100 @@
+{
+	"songs":[
+
+		{"title":"Sherane A.K.A Master Splinters Daughter", "artist":"Kendrick Lamar", "album":"Good Kid M.A.A.D City"},
+		{"title":"Bitch, Don't Kill My Vibe", "artist":"Kendrick Lamar", "album":"Good Kid M.A.A.D City"},
+		{"title":"Backstreet Freestyle", "artist":"Kendrick Lamar", "album":"Good Kid M.A.A.D City"},
+		{"title":"The Art of Peer Pressure", "artist":"Kendrick Lamar", "album":"Good Kid M.A.A.D City"},
+		{"title":"Money Trees", "artist":"Kendrick Lamar", "album":"Good Kid M.A.A.D City"},
+		{"title":"Poetic Justice", "artist":"Kendrick Lamar", "album":"Good Kid M.A.A.D City"},
+		{"title":"Good Kid", "artist":"Kendrick Lamar", "album":"Good Kid M.A.A.D City"},
+		{"title":"M.A.A.D City", "artist":"Kendrick Lamar", "album":"Good Kid M.A.A.D City"},
+		{"title":"Swimming Pools (Drank)", "artist":"Kendrick Lamar", "album":"Good Kid M.A.A.D City"},
+		{"title":"Sing About Me, I'm Dying of Thirst", "artist":"Kendrick Lamar", "album":"Good Kid M.A.A.D City"},
+		{"title":"Real", "artist":"Kendrick Lamar", "album":"Good Kid M.A.A.D City"},
+		{"title":"Compton", "artist":"Kendrick Lamar", "album":"Good Kid M.A.A.D City"},
+		{"title":"The Recipe", "artist":"Kendrick Lamar", "album":"Good Kid M.A.A.D City"},
+		{"title":"Black Boy Fly", "artist":"Kendrick Lamar", "album":"Good Kid M.A.A.D City"},
+		{"title":"Now or Never", "artist":"Kendrick Lamar", "album":"Good Kid M.A.A.D City"},
+		{"title":"Dirty Little Secret", "artist":"All American Rejects", "album":"Move Along"},
+		{"title":"Stab My Back", "artist":"All American Rejects", "album":"Move Along"},
+		{"title":"Move Along", "artist":"All American Rejects", "album":"Move Along"},
+		{"title":"It Ends Tonight", "artist":"All American Rejects", "album":"Move Along"},
+		{"title":"Change Your Mind", "artist":"All American Rejects", "album":"Move Along"},
+		{"title":"Night Drive", "artist":"All American Rejects", "album":"Move Along"},
+		{"title":"11:11 P.M.", "artist":"All American Rejects", "album":"Move Along"},
+		{"title":"Dance Inside", "artist":"All American Rejects", "album":"Move Along"},
+		{"title":"Top of the World", "artist":"All American Rejects", "album":"Move Along"},
+		{"title":"Straightjacket Feeling", "artist":"All American Rejects", "album":"Move Along"},
+		{"title":"I'm Waiting", "artist":"All American Rejects", "album":"Move Along"},
+		{"title":"Can't Take It", "artist":"All American Rejects", "album":"Move Along"},
+		{"title":"The Mother We Share", "artist":"CHVRCHES", "album":"The Bones of What You Believe"},
+		{"title":"We Sink", "artist":"CHVRCHES", "album":"The Bones of What You Believe"},
+		{"title":"Gun", "artist":"CHVRCHES", "album":"The Bones of What You Believe"},
+		{"title":"Tether", "artist":"CHVRCHES", "album":"The Bones of What You Believe"},
+		{"title":"Lies", "artist":"CHVRCHES", "album":"The Bones of What You Believe"},
+		{"title":"Under the Tide", "artist":"CHVRCHES", "album":"The Bones of What You Believe"},
+		{"title":"Recover", "artist":"CHVRCHES", "album":"The Bones of What You Believe"},
+		{"title":"Night Sky", "artist":"CHVRCHES", "album":"The Bones of What You Believe"},
+		{"title":"Science/Visions", "artist":"CHVRCHES", "album":"The Bones of What You Believe"},
+		{"title":"Lungs", "artist":"CHVRCHES", "album":"The Bones of What You Believe"},
+		{"title":"By the Throat", "artist":"CHVRCHES", "album":"The Bones of What You Believe"},
+		{"title":"You Caught the Light", "artist":"CHVRCHES", "album":"The Bones of What You Believe"},
+		{"title":"Welcome To New York", "artist":"Taylor Swift", "album":"1989"},
+		{"title":"Blank Space", "artist":"Taylor Swift", "album":"1989"},
+		{"title":"Style", "artist":"Taylor Swift", "album":"1989"},
+		{"title":"Out Of The Woods", "artist":"Taylor Swift", "album":"1989"},
+		{"title":"All You Had To Do Was Stay", "artist":"Taylor Swift", "album":"1989"},
+		{"title":"Shake It Off", "artist":"Taylor Swift", "album":"1989"},
+		{"title":"I Wish You Would", "artist":"Taylor Swift", "album":"1989"},
+		{"title":"Bad Blood", "artist":"Taylor Swift", "album":"1989"},
+		{"title":"Wildest Dreams", "artist":"Taylor Swift", "album":"1989"},
+		{"title":"How You Get the Girl", "artist":"Taylor Swift", "album":"1989"},
+		{"title":"This Love", "artist":"Taylor Swift", "album":"1989"},
+		{"title":"I Know Places", "artist":"Taylor Swift", "album":"1989"},
+		{"title":"Clean", "artist":"Taylor Swift", "album":"1989"},
+		{"title":"Wonderland", "artist":"Taylor Swift", "album":"1989"},
+		{"title":"You Are in Love", "artist":"Taylor Swift", "album":"1989"},
+		{"title":"New Romantics", "artist":"Taylor Swift", "album":"1989"}
+
+	],
+
+	"saved":[
+		{
+			"title":"Ya Bish!", 
+			"username":"Maria",
+			"songIds":[0,1,2,3,4,5]
+		}
+	],
+
+	"friends":[
+		{
+			"title":"The All American Playlist", 
+			"username":"Bob",
+			"songIds":[15,16,17,18,19,20,21,22,23,24,25,26]
+		},
+		{
+			"title":"Taytay Partay", 
+			"username":"Bob",
+			"songIds":[39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54]
+		}
+	],
+	
+	"popular":[
+		{
+			"title":"Take me to CHVRCH", 
+			"username":"Jeff",
+			"songIds":[27,28,29,30,31,32,33,34,35,36,37,38]
+		},
+		{
+			"title":"The All American Playlist", 
+			"username":"Bob",
+			"songIds":[15,16,17,18,19,20,21,22,23,24,25,26]
+		},
+		{
+			"title":"Ya Bish!", 
+			"username":"Maria",
+			"songIds":[0,1,2,3,4,5]
+		}
+	]
+}
