@@ -19,7 +19,7 @@ function loadPage(pageName)
     switch(pageName)
     {
         case "play":
-            loadPageHelper("html/play.html?version=3",playReady,pageName);
+            loadPageHelper("html/play.html?version=5",playReady,pageName);
             break;
         default: 
             loadPageHelper("html/home.html?version=5", homeReady,pageName);
@@ -32,6 +32,11 @@ function loadPageHelper(htmlFile, func, pageName)
     $('#page_active').fadeOut(function() {
         $('#page_active').load(htmlFile,function() 
         {
+            if(pageName == "play")
+            {
+                initPlaylist();
+            }
+            
             $('#page_active').fadeIn(func);
         });
     });
@@ -45,13 +50,16 @@ function homeReady()
     $('#tab_popular').click();
 }
 
+var nextSongClicked;
+var prevSongClicked;
 function playReady()
 {
-    //$(document).foundation('slider', 'reflow');
-
-
     $('#btn_play').click(togglePlayPause);
+    $('#btn_prev').click(prevClicked);
+    $('#btn_next').click(nextClicked);
     $('#btn_save').click(toggleSave);
+    currentSong = 0;
+    playMusic();
 }
 
 //  HOME  PAGE FUNCTIONS
@@ -121,7 +129,8 @@ function searchSongs(query)
                     if(songs[i].title.toLowerCase().indexOf(query.toLowerCase()) != -1 
                         && num_songs < MAX_SONGS)
                     {
-                        addPanel(songs[i].title, songs[i].artist, false);
+                        addPanel(songs[i].title, songs[i].artist, [i],
+                                    songs[i].title, getUsername());
                         num_songs++;
                     }
                 }
@@ -138,9 +147,10 @@ function searchSongs(query)
                         songs[i].artist.toLowerCase().indexOf(query.toLowerCase()) != -1) 
                         && num_albums < MAX_ALBUMS)
                     {
-                        if(num_albums == 0 || (num_albums > 1 && albums[i-1] != songs[i].album))
+                        if(num_albums == 0 || (num_albums > 0 && albums[num_albums-1] != songs[i].album))
                         {
-                            addPanel(songs[i].album, songs[i].artist, false);
+                            addPanel(songs[i].album, songs[i].artist, getSongIdsFromAlbum(songs,i), 
+                                songs[i].album, getUsername());
                             albums[num_albums] = songs[i].album;
                             num_albums++;
                         }
@@ -154,6 +164,29 @@ function searchSongs(query)
             }
         });
     });
+}
+
+function getSongIdsFromAlbum(songs, i)
+{
+    var album = songs[i].album;
+    var array = [];
+    var num_songs = 1;
+    
+    array[0] = i;
+    
+    for(var j = i+1; j < songs.length; j++)
+    {
+        var song = songs[i];
+        
+        if(song.album == album)
+        {
+            array[num_songs] = j;
+            num_songs++;
+        }
+        else break;
+    }
+    
+    return array;
 }
 
 var MAX_LISTS = 5;
@@ -179,9 +212,10 @@ function searchPlaylists(query)
                         playlists[i].username.toLowerCase().indexOf(query.toLowerCase()) != -1) 
                         && num_lists < MAX_LISTS)
                     {
-                        if(num_lists == 0 || (num_lists > 1 && lists[i-1] != playlists[i].title))
+                        if(num_lists == 0 || (num_lists > 0 && lists[num_lists-1] != playlists[i].title))
                         {
-                            addPanel(playlists[i].title, playlists[i].username, false);
+                            addPanel(playlists[i].title, playlists[i].username, playlists[i].songIds,
+                                        playlists[i].title, playlists[i].username);
                             lists[num_lists] = playlists[i].title;
                             num_lists++;
                         }
@@ -226,9 +260,68 @@ function login()
     $('#loginAlertSuccess').slideDown().delay(1000).slideUp();
 }
 
+var username;
+
 function getUsername()
 {
-    return $('#username').val();
+    if(loggedIn)
+        username = $('#username').val();
+    else username = "Anonymous";
+    
+    return username;
+}
+
+function playMusic()
+{
+    $( ".progress > .meter" ).animate({
+        width: "+=1%"
+      }, 100, function() {
+          if($("#btn_play > i").hasClass("fi-pause"))
+          {
+              var max = $( ".progress" ).width();
+              
+              if($( ".progress > .meter" ).width() > max || nextSongClicked)
+              {
+                  nextSong();
+                  nextSongClicked = false;
+              }
+              else if(prevSongClicked)
+              {
+                  prevSong();
+                  prevSongClicked = false;
+              }
+              playMusic();
+          }
+      });
+}
+
+var currentSong;
+
+function prevClicked()
+{
+    prevSongClicked = true;
+}
+
+function prevSong()
+{
+    $( ".progress > .meter" ).css("width","0%");
+}
+
+function nextClicked()
+{
+    nextSongClicked = true;
+}
+
+function nextSong()
+{
+    $( ".progress > .meter" ).css("width","0%");
+    currentSong++;
+    setActiveSongPanel();
+}
+
+function setActiveSongPanel()
+{
+    $('.song_panel.active').removeClass('active');
 }
 
 function logout()
@@ -290,10 +383,7 @@ function getPlaylists(src)
             {
                 item = array[i];
 
-                if(i==array.length-1) 
-                    addPanel(item.title,item.username, true);
-                else 
-                    addPanel(item.title,item.username, false);
+                addPanel(item.title,item.username, item.songIds, item.title,item.username);
             };
 
             $('.content-panel').slideDown();
@@ -332,16 +422,13 @@ function expandSearchbar()
     }
 }
 
-function addPanel(title, username, lastPanel)
+function addPanel(title, username, ids, name, author)
 {
-    var style="";
-    if(lastPanel) style = ' style="margin-bottom:0px;"';
-
     $('.content-panel').append(
-    '<a class="link-panel">'+
+    '<a class="link-panel" ids="['+ids+']" name="'+name+'" author="'+author+'">'+
         '<div class="row">'+
             '<div class="small-12 columns">'+
-                '<div class="panel"'+style+'>'+
+                '<div class="panel">'+
                     '<h4>'+title+'</h4>'+
                     '<h6>'+username+'</h6>'+
                 '</div>'+
@@ -349,7 +436,8 @@ function addPanel(title, username, lastPanel)
         '</div>'+
     '</a>'
     );
-
+    
+    $('.link-panel').unbind('click');
     $('.link-panel').click(panelClicked);
 }
 
@@ -364,19 +452,56 @@ function addLabel(str)
     );
 }
 
+var songIds;
+var playlistName;
+var playlistAuthor;
 
 function panelClicked()
 {
+    console.log("Panel clicked");
+    songIds = $(this).attr('ids');
+    playlistName = $(this).attr('name');
+    playlistAuthor = $(this).attr('author');
     loadPage("play");
 }
 
 
 //  PLAY PAGE STUFF
 
+var numSongs;
+
+function initPlaylist()
+{
+    var ids = $.parseJSON(songIds);
+    numSongs = ids.length;
+    
+    $('#current_playlist').text(playlistName);
+    $('#current_author').text(playlistAuthor);
+    
+    $.getJSON('data/music.json', function(data){
+        
+        $('#row_songs').html("");
+        
+        var songs = data.songs;
+        
+        $('#current_title').text(songs[ids[0]].title);
+        $('#current_artist').text(songs[ids[0]].artist);
+        
+        for(var i = 0; i < ids.length; i++)
+        {
+            var song = songs[ids[i]];
+            addSongToPlaylist(song.title, song.artist, i, i==0);
+        }
+        
+    });
+}
+
 function togglePlayPause()
 {
     $("#btn_play > i").toggleClass("fi-play");
     $("#btn_play > i").toggleClass("fi-pause");
+    
+    if($("#btn_play > i").hasClass("fi-pause")) playMusic();
 }
 
 function toggleSave()
@@ -388,4 +513,31 @@ function toggleSave()
 function promptReplace()
 {
     $('#saveModal').foundation('reveal','open');
+}
+
+function addSongToPlaylist(title, artist, id, active)
+{
+    var classy = "";
+    if(active) classy=" active";
+    
+    $('#row_songs').append(
+                '<div class="small-12 columns">'+
+                    '<div class="panel song_panel'+classy+' id='+id+'">'+
+                        '<div class="row">'+
+                            '<div class="small-11 columns">'+
+                                '<h5 class="playlist">'+title+'</h5>'+
+                                '<p class="artist">'+artist+'</p>'+
+                            '</div>'+
+                            '<div class="small-1 columns div_remove">'+
+                                '<div class="row collapse">'+
+                                    '<div class="small-12 columns">'+
+                                        '<a>'+
+                                        '<i class="fi-x"></i>'+
+                                        '</a>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>');
 }
