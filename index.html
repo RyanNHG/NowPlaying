@@ -52,17 +52,30 @@
         Login successful!
       </div>
 
-      <div id="saveAlertSuccess" data-alert class="alert-box success">
-        Login successful!
-      </div>
-
-      <div id="unsaveAlertSuccess" data-alert class="alert-box success">
-        Login successful!
-      </div>
-
       <div id="logoutAlertSuccess" data-alert class="alert-box success">
         Logout successful!
       </div>
+
+      <div id="saveAlertSuccess" data-alert class="alert-box success">
+        Saved to your playlists!
+      </div>
+
+      <div id="unsaveAlertSuccess" data-alert class="alert-box success">
+        Removed from your playlists!
+      </div>
+
+      <div id="settingsAlertSuccess" data-alert class="alert-box success">
+        Settings saved!
+      </div>
+      
+      <div id="settingsAlertError" data-alert class="alert-box error">
+        Must have a playlist name!
+      </div>
+      
+      <div id="modAlertError" data-alert class="alert-box warning">
+        Must be a mod to do this!
+      </div>
+      
     </div>
 
     <!-- END NAV BAR -->
@@ -136,7 +149,7 @@
       <p>Looks like you have saved this playlist before.</p>
       <div class="row">
         <div class="small-6 columns">
-          <button class="expand warning" id="btn_replaceOldSave">Replace old save</button>
+          <button class="expand active" id="btn_replaceOldSave">Replace old save</button>
         </div>
         <div class="small-6 columns">
           <button class="expand" id="btn_createNewSave">Create new save</button>

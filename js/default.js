@@ -1,3 +1,15 @@
+/** TO-DO:
+ *  - Info and settings for playlist
+ *  - Add friend option
+ *  - Mod requests in chat?
+ *  - Clear chat on send
+ *  - Alert on add and remove song/friend
+ *  - login prompt on anonymous save/chat
+ *  - mod modal
+ *  - show saved playlists
+ *  - show friends
+ */  
+
 $(document).ready(onReady);
 
 var loggedIn;
@@ -62,12 +74,19 @@ function playReady()
     $('#field_addSong').keyup(addSongChanged);
     $('#field_addSong').focusin(addSongFocusIn);
     $('#field_addSong').focusout(addSongFocusOut);
+    $('#panel_info').click(toggleInfo);
+    $('#setting_save').click(settingsSaved);
+    $('#setting_cancel').click(toggleInfo);
+    $('.setting_visibility').click(setVisibility);
+    $('#btn_toggleChat').click(toggleChat);
+    $('#current_mods').text($('#current_author').text());
     currentSong = 0;
     playMusic();
 }
 
+///////////////////////////////
 //  HOME  PAGE FUNCTIONS
-
+///////////////////////////////
 function tabClicked()
 {
     var tab = $(this).attr('id');
@@ -319,7 +338,6 @@ function getPlaylists(src)
 
             var item;
             var array;
-            console.log(data);
 
             switch(lastClickedTab)
             {
@@ -448,14 +466,27 @@ function addPanelClicked()
 
 function addSongChanged()
 {
-    searchSongs($(this).val(),false);
+    if(userIsMod())
+    {
+        searchSongs($(this).val(),false);
+    }
+    else $('#field_addSong').val("");
 }
 
 function addSongFocusIn()
 {
-    $('#dark_panel').slideUp(function(){
-        $('#add_panel').slideDown(); 
-    });
+    if(userIsMod())
+    {
+        $('#dark_panel').slideUp(function(){
+            $('#add_panel').slideDown(); 
+        });
+    }
+    else showModError();
+}
+
+function showModError()
+{
+    $('#modAlertError').slideDown().delay(1000).slideUp();
 }
 
 function addSongFocusOut()
@@ -529,33 +560,45 @@ function setActiveSongPanel()
     $('.song_panel.active').removeClass('active');
     $('#song_panel'+currentSong).addClass('active');
     $('#current_title').text($('#song_panel'+currentSong).attr('title'));
-    $('#current_author').text($('#song_panel'+currentSong).attr('artist'));
+    $('#current_artist').text($('#song_panel'+currentSong).attr('artist'));
     $("#row_songs").animate({ scrollTop: $('#song_panel0').parent().height()*currentSong}, 1000);
 }
 
 function removeSongPanel()
 {
-    var id = $(this).attr('song_id');
-    
-    if(id < currentSong) 
-        currentSong--;
-    else if(id == currentSong)
+    if(userIsMod())
     {
-        nextSong();
-        currentSong--;
+        var id = $(this).attr('song_id');
+        
+        numSongs--;
+        
+        $('#song_panel' + id).remove(); 
+    
+        if(id < currentSong) 
+            currentSong--;
+        else if(id == currentSong)
+        {
+            nextSong();
+            currentSong--;
+        }
+        
+        while(id < numSongs + 1)
+        {
+            console.log(id);
+            $('#song_panel'+id+' a').attr("song_id","" + (id - 1));
+            $('#song_panel'+id).attr("id","song_panel" + (id - 1));
+            id++;
+        }
+        
+        if(numSongs == 0)
+        {
+            $('#current_title').text('Add a song');
+            $('#current_artist').text();
+            togglePlayPause();
+            $( ".progress > .meter" ).css("width","0%");
+        }
     }
-    
-    $('#song_panel' + id).remove();
-    
-    while(id < numSongs)
-    {
-        console.log(id);
-        $('#song_panel'+id+' a').attr("song_id","" + (id - 1));
-        $('#song_panel'+id).attr("id","song_panel" + (id - 1));
-        id++;
-    }
-    
-    numSongs--;
+    else showModError();
 }
 
 var numSongs;
@@ -590,17 +633,44 @@ function initPlaylist()
 
 function togglePlayPause()
 {
-    $("#btn_play > i").toggleClass("fi-play");
-    $("#btn_play > i").toggleClass("fi-pause");
-    
-    if($("#btn_play > i").hasClass("fi-pause")) playMusic();
-    else generateBotMessage(bot_msg_pause);
+    if(numSongs != 0 || $("#btn_play > i").hasClass("fi-pause"))
+    {
+        $("#btn_play > i").toggleClass("fi-play");
+        $("#btn_play > i").toggleClass("fi-pause");
+        
+        if($("#btn_play > i").hasClass("fi-pause")) playMusic();
+        else generateBotMessage(bot_msg_pause);
+    }
 }
 
 function toggleSave()
 {
-    $('#btn_save').toggleClass("success");
-    promptReplace();
+    if(getUsername() == "Anonymous")
+        promptLogin();
+    else
+    {
+        $('#btn_save').toggleClass("active");
+        if(oldVersionSaved()) promptReplace();
+    }
+}
+
+function oldVersionSaved()
+{
+    return false;
+}
+
+function toggleChat()
+{
+    $('#btn_toggleChat i').toggleClass('fi-arrow-down');
+    $('#btn_toggleChat i').toggleClass('fi-arrow-up');
+    $('#panel_chat').parent().slideToggle(function () {
+        if($('#panel_chat').parent().css("display") != "none")
+        {
+            $('#row_modInfo').slideUp();
+            $('#row_publicInfo').slideUp();
+        }
+    });
+    
 }
 
 function promptReplace()
@@ -637,11 +707,37 @@ function addSongToPlaylist(title, artist, active)
      $('#song_panel'+numSongs+' a').click(removeSongPanel);
                 
      numSongs++;
+     
+     if(numSongs == 1)
+     {
+        $('#current_title').text(title);
+        $('#current_artist').text(artist);
+     }
+}
+
+function makeUserMod()
+{
+    if(!userIsMod())
+    {
+        $('#current_mods').text($('#current_mods').text()+', '+getUsername());
+        sendMessage(bot_msg_modconfirm[0],
+                $('#current_author').text());
+    }
 }
 
 function sendMessageClicked()
 {
-    sendMessage($('#field_message').val(),getUsername());
+    if(getUsername() == "Anonymous")
+        promptLogin();
+    else
+    {
+        sendMessage($('#field_message').val(),getUsername());
+        
+        if($('#field_message').val().indexOf("mod") > -1)
+            makeUserMod();
+            
+        $('#field_message').val("");
+    }
 }
 
 var bot_names = ["Maria","Bob","Ryan","Adam","Matt","Trace"];
@@ -678,7 +774,7 @@ function sendMessage(message,sender)
     message = (message.replace('%user%', getUsername())).replace('%song%', $('#current_title').text());
     
     $('#row_chatarea').append(
-        '<div class="small-12 columns">'+
+        '<div class="small-12 columns newMessage">'+
           '<div class="message '+colorClass+'">'+
             '<h6><strong>'+sender+': </strong></h6>'+
             '<p>'+message+'</p>'+
@@ -687,6 +783,83 @@ function sendMessage(message,sender)
         '</div>'
     );
     
+    $('.newMessage').fadeIn(function () 
+    {
+        $('.newMessage').removeClass('newMessage');    
+    });
+    
     $("#row_chatarea").animate({ scrollTop: $('#row_chatarea')[0].scrollHeight}, 1000);
     
+}
+
+//  Info panel
+function toggleInfo()
+{
+    if($('#row_publicInfo').css('display') == 'none' &&
+        $('#row_modInfo').css('display') == 'none')
+    {
+        if(userIsMod())
+        {
+            $('#setting_playlist').val($('#current_playlist').text());
+            $('#setting_description').val($('#current_description').text());
+            tempMods = $('#current_mods');
+            $('#row_modInfo').slideDown();
+        }
+        else
+        {
+            $('#row_publicInfo').slideDown();
+        }
+        toggleChat();
+    }
+    else
+    {
+        $('#row_modInfo').slideUp();
+        $('#row_publicInfo').slideUp();
+        toggleChat();
+    }
+}
+var tempMods;
+
+function settingsSaved()
+{
+    if($('#setting_playlist').val() != "")
+    {
+        $('#current_playlist').text($('#setting_playlist').val());
+        $('#current_description').text($('#setting_description').val());
+        $('#current_visibilityLabel').text($('#setting_visibilityLabel').text());
+        
+        $('.btn_visibility').removeClass('active');
+        
+        if($('#setting_public').hasClass('active'))
+            $('#btn_public').addClass('active');
+        else if($('#setting_friendsOnly').hasClass('active'))
+            $('#btn_friendsOnly').addClass('active');
+        else if($('#setting_private').hasClass('active'))
+            $('#btn_private').addClass('active');
+            
+        $('#current_mods').text(tempMods);
+        
+        toggleChat();
+        $('#settingsAlertSuccess').slideDown().delay(1000).slideUp();
+    }
+    else $('#settingsAlertError').slideDown().delay(1000).slideUp();
+}
+
+function setVisibility()
+{
+
+    $('.setting_visibility').removeClass('active');
+    $(this).addClass('active');
+    
+    if($('#setting_public').hasClass('active'))
+        $('#setting_visibilityLabel').text('Public');
+    else if($('#setting_friendsOnly').hasClass('active'))
+        $('#setting_visibilityLabel').text('Friends Only');
+    else if($('#setting_private').hasClass('active'))
+        $('#setting_visibilityLabel').text('Private');
+}
+
+function userIsMod()
+{
+    return ($('#current_mods').text().indexOf(getUsername()) > -1);
 }

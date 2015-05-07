@@ -92,38 +92,118 @@
 
 
         <!-- HEADER -->
-        <a>
-          <div class="panel">
-            <div class="row">
+        <div class="panel">
+          <div class="row">
 
+            <a id="panel_info">
               <div class="small-9 columns">
                 <h3 id="current_playlist">Playlist Name</h3>
                 <p id="current_author">Author</p>
               </div>
-              <div class="small-3 columns" id="div_save">
-                <div class="row collapse">
-                  <div class="small-12 columns">
-                    <button class="tiny expand" id = "btn_save">
-                      <i class="fi-star"></i>
-                    </button>
-                  </div>
+            </a>
+            <div class="small-3 columns" id="div_save">
+              <div class="row collapse">
+                <div class="small-12 columns">
+                  <button class="tiny expand" id = "btn_save">
+                    <i class="fi-save"></i>
+                  </button>
                 </div>
               </div>
-
             </div>
-          </div>
-        </a>
-
-        <!-- PUBLIC VIEW -->
-        <div class="row" id="row_publicInfo">
-
-          <div class="small-12 columns">
 
           </div>
         </div>
 
+        <!-- PUBLIC VIEW -->
+        <div class="row collapse" id="row_publicInfo">
+          
+          <div class="small-12 columns">
+            <h5>Description</h5>
+            <p id="current_description">Best playlist ever!</p>
+          </div>
+          
+          <div class="small-12 columns">
+            <div class="row collapse">
+              <div class="small-6 columns">
+                <h5>Visibility</h5>
+              </div>
+              <div class="small-6 columns">
+                <p id="current_visibilityLabel" class="right">Public</p>
+              </div>
+              
+              <div class="small-4 columns">
+                <a class="button tiny expand active btn_visibility"  id="btn_public" disabled>
+                  <i class="fi-torsos-all"></i>
+                </a>
+              </div>
+              <div class="small-4 columns">
+                <a class="button tiny expand btn_visibility" id="btn_friendsOnly" disabled>
+                  <i class="fi-torsos"></i>
+                </a>
+              </div>
+              <div class="small-4 columns">
+                <a class="button tiny expand btn_visibility"  id="btn_private" disabled>
+                  <i class="fi-torso"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="small-12 columns">
+            <h5>Mods</h5>
+            <p id="current_mods">Jeff</p>
+          </div>
+          
+        </div>
+
         <!-- MOD VIEW -->
         <div class="row" id="row_modInfo">
+
+          <div class="small-12 columns">
+            <h5>Title</h5>
+            <input type="text" id="setting_playlist" placeholder="Enter a title..."></input>
+          </div>
+          
+          <div class="small-12 columns">
+            <h5>Description</h5>
+            <textarea id="setting_description" placeholder="Enter a description..."></textarea>
+          </div>
+          
+          <div class="small-12 columns">
+            <div class="row collapse">
+              <div class="small-6 columns">
+                <h5>Visibility</h5>
+              </div>
+              <div class="small-6 columns">
+                <p id="setting_visibilityLabel" class="right">Public</p>
+              </div>
+              
+              <div class="small-4 columns">
+                <a class="button tiny expand active setting_visibility"  id="setting_public">
+                  <i class="fi-torsos-all"></i>
+                </a>
+              </div>
+              <div class="small-4 columns">
+                <a class="button tiny expand setting_visibility" id="setting_friendsOnly">
+                  <i class="fi-torsos"></i>
+                </a>
+              </div>
+              <div class="small-4 columns">
+                <a class="button tiny expand setting_visibility"  id="setting_private">
+                  <i class="fi-torso"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="small-12 columns">
+            <h5>Mods</h5>
+            <a class="button tiny expand"  id="setting_addMods">Choose mods</a>
+          </div>
+          <div class="small-6 columns">
+            <a class="button tiny expand active" id="setting_save">Save</a>
+          </div>
+          <div class="small-6 columns">
+            <a class="button tiny expand" id="setting_cancel">Cancel</a>
+          </div>
 
         </div>
       </div>
@@ -131,13 +211,8 @@
 
     <div class="row" id="row_chat">
 
-      <div class="small-10 columns">
+      <div class="small-12 columns">
         <h4>Chat</h4>
-      </div>
-      <div class="small-2 columns">
-        <a id="btn_toggleChat">
-          <i class="fi-arrow-down"></i>
-        </a>
       </div>
 
       <div class="small-12 columns">

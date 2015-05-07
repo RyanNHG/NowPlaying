@@ -48,10 +48,6 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0px;   
 }
 
-.home-tabs a.active button {
-    background-color: #700070;
-}
-
 .home-tabs a h4{
     padding-left: 15px;
     margin: 0px;
@@ -128,10 +124,6 @@ h1, h2, h3, h4, h5, h6 {
     background:#700070;
 }
 
-#panel_chat, #dark_panel {
-    height: 40vh;
-    margin:0px;
-}
 
 .message h6{
     color:#008CBA;
@@ -165,4 +157,41 @@ h1, h2, h3, h4, h5, h6 {
 
 #add_panel {
     display: none;
+}
+
+#row_modInfo, #row_publicInfo {
+    display: none;
+}
+
+#row_info .small-4 i {
+    font-size: x-large;
+}
+
+a.active, button.active,
+#row_info .small-4 a.active,
+.home-tabs a.active button {
+    background-color: #700070;
+}
+
+textarea{
+    resize: none;
+}
+
+.newMessage {
+    display: none;
+}
+
+#row_current, #row_info {
+    height: 15vh;
+    margin:0px;
+}
+
+#row_playlist, #row_chat {
+    height: 40vh;
+    margin:0px;
+}
+
+#dark_panel, #panel_chat {
+    height: 40vh;
+    margin:0px;
 }
