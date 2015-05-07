@@ -1,10 +1,6 @@
 /** TO-DO:
- *  - Info and settings for playlist
  *  - Add friend option
- *  - Mod requests in chat?
- *  - Clear chat on send
  *  - Alert on add and remove song/friend
- *  - login prompt on anonymous save/chat
  *  - mod modal
  *  - show saved playlists
  *  - show friends
@@ -78,6 +74,7 @@ function playReady()
     $('#setting_save').click(settingsSaved);
     $('#setting_cancel').click(toggleInfo);
     $('.setting_visibility').click(setVisibility);
+    $('#setting_addMods').click(showModModal);
     $('#btn_toggleChat').click(toggleChat);
     $('#current_mods').text($('#current_author').text());
     currentSong = 0;
@@ -725,6 +722,11 @@ function makeUserMod()
     }
 }
 
+function showModModal()
+{
+    $('#modModal').foundation('reveal','open');
+}
+
 function sendMessageClicked()
 {
     if(getUsername() == "Anonymous")
@@ -802,7 +804,7 @@ function toggleInfo()
         {
             $('#setting_playlist').val($('#current_playlist').text());
             $('#setting_description').val($('#current_description').text());
-            tempMods = $('#current_mods');
+            $('#setting_modlist').val($('#current_mods').text());
             $('#row_modInfo').slideDown();
         }
         else
@@ -818,7 +820,6 @@ function toggleInfo()
         toggleChat();
     }
 }
-var tempMods;
 
 function settingsSaved()
 {
@@ -837,7 +838,7 @@ function settingsSaved()
         else if($('#setting_private').hasClass('active'))
             $('#btn_private').addClass('active');
             
-        $('#current_mods').text(tempMods);
+        $('#current_mods').text($('#setting_modlist').val());
         
         toggleChat();
         $('#settingsAlertSuccess').slideDown().delay(1000).slideUp();
