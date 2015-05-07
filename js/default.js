@@ -58,6 +58,10 @@ function playReady()
     $('#btn_prev').click(prevClicked);
     $('#btn_next').click(nextClicked);
     $('#btn_save').click(toggleSave);
+    $('#btn_message').click(sendMessageClicked);
+    $('#field_addSong').keyup(addSongChanged);
+    $('#field_addSong').focusin(addSongFocusIn);
+    $('#field_addSong').focusout(addSongFocusOut);
     currentSong = 0;
     playMusic();
 }
@@ -100,7 +104,7 @@ function tabClicked()
             switchToTab(tab);
             if(searchbarId=="div_find")
                 searchPlaylists($('#find_query').val());
-            else searchSongs($('#create_query').val());
+            else searchSongs($('#create_query').val(),true);
             return;  
     }
 }
@@ -108,12 +112,15 @@ function tabClicked()
 var MAX_SONGS = 3;
 var MAX_ALBUMS = 2;
 
-function searchSongs(query)
+function searchSongs(query, home)
 {
-    $('.content-panel').slideUp(function(){
+    if(home) panel = '.content-panel';
+    else panel = '#row_results';
+    
+    $(panel).slideUp(function(){
         $.getJSON( "data/music.json",function(data){
 
-            $('.content-panel').html("");
+            $(panel).html("");
             if(query != "")
             {
                 var songs = data.songs;
@@ -130,7 +137,7 @@ function searchSongs(query)
                         && num_songs < MAX_SONGS)
                     {
                         addPanel(songs[i].title, songs[i].artist, [i],
-                                    songs[i].title, getUsername());
+                                    songs[i].title, getUsername(),home);
                         num_songs++;
                     }
                 }
@@ -150,7 +157,7 @@ function searchSongs(query)
                         if(num_albums == 0 || (num_albums > 0 && albums[num_albums-1] != songs[i].album))
                         {
                             addPanel(songs[i].album, songs[i].artist, getSongIdsFromAlbum(songs,i), 
-                                songs[i].album, getUsername());
+                                songs[i].album, getUsername(),home);
                             albums[num_albums] = songs[i].album;
                             num_albums++;
                         }
@@ -160,7 +167,7 @@ function searchSongs(query)
                 if(num_albums == 0)
                     addLabel("No albums found.");
 
-                $('.content-panel').slideDown();
+                $(panel).slideDown();
             }
         });
     });
@@ -215,7 +222,7 @@ function searchPlaylists(query)
                         if(num_lists == 0 || (num_lists > 0 && lists[num_lists-1] != playlists[i].title))
                         {
                             addPanel(playlists[i].title, playlists[i].username, playlists[i].songIds,
-                                        playlists[i].title, playlists[i].username);
+                                        playlists[i].title, playlists[i].username,true);
                             lists[num_lists] = playlists[i].title;
                             num_lists++;
                         }
@@ -269,93 +276,6 @@ function getUsername()
     else username = "Anonymous";
     
     return username;
-}
-
-function playMusic()
-{
-    $( ".progress > .meter" ).animate({
-        width: "+=1%"
-      }, 100, function() {
-          if($("#btn_play > i").hasClass("fi-pause"))
-          {
-              var max = $( ".progress" ).width();
-              
-              if($( ".progress > .meter" ).width() > max || nextSongClicked)
-              {
-                  nextSong();
-                  nextSongClicked = false;
-              }
-              else if(prevSongClicked)
-              {
-                  prevSong();
-                  prevSongClicked = false;
-              }
-              playMusic();
-          }
-      });
-}
-
-var currentSong;
-
-function prevClicked()
-{
-    if($("#btn_play > i").hasClass("fi-pause"))
-        prevSongClicked = true;
-    else prevSong();
-}
-
-function prevSong()
-{
-    $( ".progress > .meter" ).css("width","0%");
-    currentSong = (currentSong+numSongs-1)%numSongs;
-    setActiveSongPanel();
-}
-
-function nextClicked()
-{
-    if($("#btn_play > i").hasClass("fi-pause"))
-        nextSongClicked = true;
-    else nextSong();
-}
-
-function nextSong()
-{
-    $( ".progress > .meter" ).css("width","0%");
-    currentSong = (currentSong+1)%numSongs;
-    setActiveSongPanel();
-}
-
-function setActiveSongPanel()
-{
-    $('.song_panel.active').removeClass('active');
-    $('#song_panel'+currentSong).addClass('active');
-    $('#current_title').text($('#song_panel'+currentSong).attr('title'));
-    $('#current_author').text($('#song_panel'+currentSong).attr('artist'));
-}
-
-function removeSongPanel()
-{
-    var id = $(this).attr('song_id');
-    
-    if(id < currentSong) 
-        currentSong--;
-    else if(id == currentSong)
-    {
-        nextSong();
-        currentSong--;
-    }
-    
-    $('#song_panel' + id).remove();
-    
-    while(id < numSongs)
-    {
-        console.log(id);
-        $('#song_panel'+id+' a').attr("song_id","" + (id - 1));
-        $('#song_panel'+id).attr("id","song_panel" + (id - 1));
-        id++;
-    }
-    
-    numSongs--;
 }
 
 function logout()
@@ -417,7 +337,7 @@ function getPlaylists(src)
             {
                 item = array[i];
 
-                addPanel(item.title,item.username, item.songIds, item.title,item.username);
+                addPanel(item.title,item.username, item.songIds, item.title,item.username, true);
             };
 
             $('.content-panel').slideDown();
@@ -456,9 +376,12 @@ function expandSearchbar()
     }
 }
 
-function addPanel(title, username, ids, name, author)
+function addPanel(title, username, ids, name, author, home)
 {
-    $('.content-panel').append(
+    if(home) panel = '.content-panel';
+    else panel = '#row_results';
+    
+    $(panel).append(
     '<a class="link-panel" ids="['+ids+']" name="'+name+'" author="'+author+'">'+
         '<div class="row">'+
             '<div class="small-12 columns">'+
@@ -472,7 +395,10 @@ function addPanel(title, username, ids, name, author)
     );
     
     $('.link-panel').unbind('click');
-    $('.link-panel').click(panelClicked);
+    if(home)
+        $('.link-panel').click(panelClicked);
+    else
+        $('.link-panel').click(addPanelClicked);
 }
 
 function addLabel(str)
@@ -492,7 +418,6 @@ var playlistAuthor;
 
 function panelClicked()
 {
-    console.log("Panel clicked");
     songIds = $(this).attr('ids');
     playlistName = $(this).attr('name');
     playlistAuthor = $(this).attr('author');
@@ -501,6 +426,137 @@ function panelClicked()
 
 
 //  PLAY PAGE STUFF
+
+function addPanelClicked()
+{
+    var ids = $.parseJSON($(this).attr('ids'));
+    
+    $.getJSON('data/music.json', function(data){
+        
+        var songs = data.songs;
+        
+        for(var i = 0; i < ids.length; i++)
+        {
+            var song = songs[ids[i]];
+            addSongToPlaylist(song.title, song.artist, false);
+        }
+        
+    });
+    
+    $('#field_addSong').val('');
+}
+
+function addSongChanged()
+{
+    searchSongs($(this).val(),false);
+}
+
+function addSongFocusIn()
+{
+    $('#dark_panel').slideUp(function(){
+        $('#add_panel').slideDown(); 
+    });
+}
+
+function addSongFocusOut()
+{
+    $('#add_panel').slideUp(function(){
+        $('#dark_panel').slideDown(); 
+    });
+}
+
+
+function playMusic()
+{
+    $( ".progress > .meter" ).animate({
+        width: "+=1%"
+      }, 100, function() {
+          if($("#btn_play > i").hasClass("fi-pause"))
+          {
+              var max = $( ".progress" ).width();
+              
+              if($( ".progress > .meter" ).width() > max || nextSongClicked)
+              {
+                  nextSong();
+                  nextSongClicked = false;
+              }
+              else if(prevSongClicked)
+              {
+                  prevSong();
+                  prevSongClicked = false;
+              }
+              playMusic();
+          }
+      });
+}
+
+var currentSong;
+
+function prevClicked()
+{
+    if($("#btn_play > i").hasClass("fi-pause"))
+        prevSongClicked = true;
+    else prevSong();
+}
+
+function prevSong()
+{
+    $( ".progress > .meter" ).css("width","0%");
+    currentSong = (currentSong+numSongs-1)%numSongs;
+    setActiveSongPanel();
+    
+    generateBotMessage(bot_msg_next);
+}
+
+function nextClicked()
+{
+    if($("#btn_play > i").hasClass("fi-pause"))
+        nextSongClicked = true;
+    else nextSong();
+}
+
+function nextSong()
+{
+    $( ".progress > .meter" ).css("width","0%");
+    currentSong = (currentSong+1)%numSongs;
+    setActiveSongPanel();
+    
+    generateBotMessage(bot_msg_next);
+}
+
+function setActiveSongPanel()
+{
+    $('.song_panel.active').removeClass('active');
+    $('#song_panel'+currentSong).addClass('active');
+    $('#current_title').text($('#song_panel'+currentSong).attr('title'));
+    $('#current_author').text($('#song_panel'+currentSong).attr('artist'));
+    $("#row_songs").animate({ scrollTop: $('#song_panel0').parent().height()*currentSong}, 1000);
+}
+
+function removeSongPanel()
+{
+    var id = $(this).attr('song_id');
+    
+    if(id < currentSong) 
+        currentSong--;
+    else if(id == currentSong)
+    {
+        nextSong();
+        currentSong--;
+    }
+    
+    $('#song_panel' + id).remove();
+    
+    while(id < numSongs)
+    {
+        console.log(id);
+        $('#song_panel'+id+' a').attr("song_id","" + (id - 1));
+        $('#song_panel'+id).attr("id","song_panel" + (id - 1));
+        id++;
+    }
+    
+    numSongs--;
+}
 
 var numSongs;
 
@@ -528,6 +584,8 @@ function initPlaylist()
         }
         
     });
+    
+    generateBotMessage(bot_msg_join);
 }
 
 function togglePlayPause()
@@ -536,6 +594,7 @@ function togglePlayPause()
     $("#btn_play > i").toggleClass("fi-pause");
     
     if($("#btn_play > i").hasClass("fi-pause")) playMusic();
+    else generateBotMessage(bot_msg_pause);
 }
 
 function toggleSave()
@@ -578,4 +637,56 @@ function addSongToPlaylist(title, artist, active)
      $('#song_panel'+numSongs+' a').click(removeSongPanel);
                 
      numSongs++;
+}
+
+function sendMessageClicked()
+{
+    sendMessage($('#field_message').val(),getUsername());
+}
+
+var bot_names = ["Maria","Bob","Ryan","Adam","Matt","Trace"];
+var bot_msg_pause = ["Oh no! I loved %song%", 
+                    "Play it! Please?", 
+                    "%user%, you're killing my vibe!"];
+var bot_msg_next = ["Sweet! %song% is where it's at!", 
+                    "I'm so sick of this song...",
+                    "Alright, changing things up!"];
+var bot_msg_add = ["Good choice, %user%!",
+                    "I don't think I've heard this before.",
+                    "Cool song!"];
+var bot_msg_remove = ["Why'd you remove that???", 
+                      "I was looking forward to that one!", 
+                      "I never liked that song, anyway..."];
+var bot_msg_join = ["Hey, %user%!", 
+                    "What's up, %user%?", 
+                    "Welcome to the jam sesh, %user%!"];
+var bot_msg_modconfirm = ["Hey %user%, you're a mod now!"];
+
+function generateBotMessage(array)
+{
+    var rand_message = Math.floor(Math.random()*array.length);
+    var rand_sender = Math.floor(Math.random()*bot_names.length);
+    
+    sendMessage(array[rand_message],bot_names[rand_sender]);
+}
+
+function sendMessage(message,sender)
+{
+    var colorClass = 'blue_sender';
+    if(sender == getUsername()) colorClass = "purple_sender";
+    message = ''+message;
+    message = (message.replace('%user%', getUsername())).replace('%song%', $('#current_title').text());
+    
+    $('#row_chatarea').append(
+        '<div class="small-12 columns">'+
+          '<div class="message '+colorClass+'">'+
+            '<h6><strong>'+sender+': </strong></h6>'+
+            '<p>'+message+'</p>'+
+            '<hr>'+
+          '</div>'+
+        '</div>'
+    );
+    
+    $("#row_chatarea").animate({ scrollTop: $('#row_chatarea')[0].scrollHeight}, 1000);
+    
 }

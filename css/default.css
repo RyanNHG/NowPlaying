@@ -137,6 +137,10 @@ h1, h2, h3, h4, h5, h6 {
     color:#008CBA;
 }
 
+.message.purple_sender h6 {
+    color:#700070;
+}
+
 .message hr{
     margin:0px;
 }
@@ -154,7 +158,11 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0px;
 }
 
-#row_songs {
+#row_songs, #row_chatarea {
     height:100%;
     overflow-y:auto;
+}
+
+#add_panel {
+    display: none;
 }
