@@ -27,7 +27,7 @@ function loadPage(pageName)
     switch(pageName)
     {
         case "play":
-            loadPageHelper("html/play.html?version=5",playReady,pageName);
+            loadPageHelper("html/play.html?version=6",playReady,pageName);
             break;
         default: 
             loadPageHelper("html/home.html?version=5", homeReady,pageName);
@@ -497,7 +497,7 @@ function addSongFocusOut()
 function playMusic()
 {
     $( ".progress > .meter" ).animate({
-        width: "+=1%"
+        width: "+=2px"
       }, 100, function() {
           if($("#btn_play > i").hasClass("fi-pause"))
           {
@@ -529,10 +529,12 @@ function prevClicked()
 
 function prevSong()
 {
+
     $( ".progress > .meter" ).css("width","0%");
     currentSong = (currentSong+numSongs-1)%numSongs;
     setActiveSongPanel();
     
+    $('#music').attr('src', 'music/0'+(currentSong%8 + 1)+'.mp3');
     generateBotMessage(bot_msg_next);
 }
 
@@ -549,6 +551,7 @@ function nextSong()
     currentSong = (currentSong+1)%numSongs;
     setActiveSongPanel();
     
+    $('#music').attr('src', 'music/0'+(currentSong%8 + 1)+'.mp3');
     generateBotMessage(bot_msg_next);
 }
 
@@ -635,8 +638,16 @@ function togglePlayPause()
         $("#btn_play > i").toggleClass("fi-play");
         $("#btn_play > i").toggleClass("fi-pause");
         
-        if($("#btn_play > i").hasClass("fi-pause")) playMusic();
-        else generateBotMessage(bot_msg_pause);
+        if($("#btn_play > i").hasClass("fi-pause"))
+        {
+            playMusic();
+            $('#music')[0].play();
+        }
+        else
+        {
+            generateBotMessage(bot_msg_pause);
+            $('#music')[0].pause();
+        }
     }
 }
 
